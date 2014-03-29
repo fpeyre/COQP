@@ -1,0 +1,16 @@
+/*Capteur de présence*/
+Group All
+
+Group Salle (All)
+
+Group SalleAir   "Salle Air"    (Salle)
+
+Group:Contact:OR(OPEN,CLOSED) Presence "Salle occupe[(%d)]" <contact> (All)
+
+/*Definition du capteur de présence*/
+
+Contact CapteurPresenceAir      "Salle air [MAP(en.map):%s]"      (SalleAir,Presence)
+/* Définition du switch d'activation/désactivation de la video */
+Number Prive    "Camera Active"
+/*Def du nombre représentant l'etat du capteur */
+Number Etat "Capteur Presence"
