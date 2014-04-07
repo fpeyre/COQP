@@ -1,0 +1,20 @@
+/*Capteur de présence*/
+Group All
+
+
+Group SalleAir(All)
+
+
+
+Group:Contact:OR(OPEN,CLOSED) Presence "Salle occupe[(%d)]" <contact> (All)
+
+/*Definition du capteur de présence*/
+
+Contact CapteurPresenceAir      "Salle air [MAP(en.map):%s]"      (SalleAir,Presence) {mqtt=">[air:test:state:OPEN:libre],>[air:test:state:CLOSED:occupé]"}
+/* Définition du switch d'activation/désactivation de la video */
+Number Prive    "Camera Active"
+/*Def du nombre représentant l'etat du capteur */
+Number Etat "Capteur Presence"
+Switch mySwitch {mqtt=">[air:test:command:ON:1],>[air:test:command:OFF:0]"}
+Switch mySwitchON  {enocean="{id=FE:FF:96:EB, eep=F6:02:01,channel=B,parameter= I"}
+Switch mySwitchOFF {enocean="{id=FE:FF:96:EB, eep=F6:02:01,channel=B,parameter= O "}

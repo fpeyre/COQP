@@ -1,0 +1,25 @@
+sitemap test label="Menu principal"
+{
+
+	Frame label= "Capteur AIR" {
+		Group item=SalleAir label="Salle AIR" icon="house"
+               }	
+		
+	Frame label= "Salle AIR"  {
+			
+					
+					Switch item= mySwitch label="Activation camera" 					
+					Text label="COQP" visibility=[Etat==1]
+					Text label="Vide"	visibility=[Etat==0]
+       Video item=Test url="http://localhost:8080/video/test"  visibility=[Prive==0]
+     Image url="http://localhost:8080/images/splash-ipad-h.png" label="openHAB" visibility=[Prive==1]
+	Webview item="Dysoweb" url="https://www.requea.com/do/Usage/ResourceReservation/Reservation-des-ressources" height="1000" 
+                
+		
+		}
+              
+	       
+}
+	
+    
+

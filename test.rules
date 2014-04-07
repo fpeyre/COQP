@@ -1,0 +1,54 @@
+rule "Initialize contact states"
+	when 
+		System started
+	then
+		Presence?.members.forEach(window|
+			postUpdate(window, if(Math::random > 0.5) OPEN else CLOSED)
+		)
+end
+
+rule "Update contact"
+when
+	Item CapteurPresenceAir changed or
+	System started
+then	
+	if(CapteurPresenceAir.state==OPEN){
+	postUpdate(Etat,0)
+	}
+	else{
+	postUpdate(Etat,1)
+	}
+	
+end
+rule "Switch Prive On "
+when
+	Item mySwitch received command ON 
+then	
+	
+	postUpdate(Prive,0)
+	
+	
+end
+
+rule "Switch Prive Off "
+when
+	Item mySwitch received command OFF or System started
+then		
+	postUpdate(Prive,1)	
+end
+
+rule "Switch Physique Prive On "
+when
+	Item mySwitchON received command ON
+then	
+	
+	postUpdate(Prive,0)
+	
+end
+
+rule "Switch Physique Privee Off "
+when
+	Item mySwitchOFF received command ON
+then		
+	postUpdate(Prive,1)	
+end
