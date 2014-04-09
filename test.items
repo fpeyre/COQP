@@ -1,20 +1,37 @@
-/*Capteur de présence*/
+
 Group All
 
 
 Group SalleAir(All)
 
 
+/* Tout nos capteurs de présence appartiennent à un groupe Présence*/
 
 Group:Contact:OR(OPEN,CLOSED) Presence "Salle occupe[(%d)]" <contact> (All)
 
 /*Definition du capteur de présence*/
 
-Contact CapteurPresenceAir      "Salle air [MAP(en.map):%s]"      (SalleAir,Presence) {mqtt=">[air:test:state:OPEN:libre],>[air:test:state:CLOSED:occupé]"}
+
+/*Capteur de demo*/
+Contact CapteurPresenceAirTest      "Salle air Test [MAP(en.map):%s]"      (SalleAir,Presence) {mqtt=">[air:test:state:OPEN:libre],>[air:test:state:CLOSED:occupé]"}
+
+/*Capteur Sensolux */
+/*Contact CapteurPresenceSensolux "Salle air Sensolux [MAP(en.map):%s]" (SalleAir,Presence) enocean="{id=00:06:52:07,eep=A5:08:02,parameter=MOVEMENT"}*/
+
+
+
 /* Définition du switch d'activation/désactivation de la video */
+
 Number Prive    "Camera Active"
+Switch mySwitch {mqtt=">[air:test:command:ON:modeprivee],>[air:test:command:OFF:modepublic]"}
+
+/* Définition du rocker switch enOcean*/
+
+Switch mySwitchON   {enocean="{id=FE:FF:96:EB,eep=F6:02:01,channel=B,parameter=I}"}
+Switch mySwitchOFF  {enocean="{id=FE:FF:96:EB,eep=F6:02:01,channel=B,parameter=O}"}
+
+
 /*Def du nombre représentant l'etat du capteur */
 Number Etat "Capteur Presence"
-Switch mySwitch {mqtt=">[air:test:command:ON:1],>[air:test:command:OFF:0]"}
-Switch mySwitchON  {enocean="{id=FE:FF:96:EB, eep=F6:02:01,channel=B,parameter= I"}
-Switch mySwitchOFF {enocean="{id=FE:FF:96:EB, eep=F6:02:01,channel=B,parameter= O "}
+
+
